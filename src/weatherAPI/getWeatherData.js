@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { formatWeatherData } from "./formatWeatherData";
 
 export async function getWeatherData(locationString) {
   const today = new Date();
@@ -10,7 +11,10 @@ export async function getWeatherData(locationString) {
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${locationString}/${fullDate}?key=UC9UHUAFNPYB476QPEQCW43WA`
     );
     const data = await response.json();
-    return data;
+    console.log(data);
+    const formattedData = formatWeatherData(data);
+    console.log(formattedData);
+    return formattedData;
   } catch (e) {
     console.error(e);
   }
