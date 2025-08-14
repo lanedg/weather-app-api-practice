@@ -1,4 +1,5 @@
 import { getWeatherData } from "../weatherAPI/getWeatherData";
+import { buildWeatherDataDisplay } from "../weatherDisplay/buildDataDisplay";
 
 export function addSubmitEventListener() {
   const form = document.getElementById("weather-form");
@@ -6,8 +7,12 @@ export function addSubmitEventListener() {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const locationString = formInput.value;
-    const data = getWeatherData(locationString);
-    console.log(data);
+    buildPage(locationString);
     form.reset();
   });
+}
+
+async function buildPage(locationString) {
+  const data = await getWeatherData(locationString);
+  buildWeatherDataDisplay(data);
 }

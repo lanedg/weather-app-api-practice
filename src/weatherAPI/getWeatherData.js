@@ -11,9 +11,7 @@ export async function getWeatherData(locationString) {
       `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${locationString}/${fullDate}?key=UC9UHUAFNPYB476QPEQCW43WA`
     );
     const data = await response.json();
-    console.log(data);
-    const formattedData = formatWeatherData(data);
-    console.log(formattedData);
+    const formattedData = await formatWeatherData(data);
     return formattedData;
   } catch (e) {
     console.error(e);
